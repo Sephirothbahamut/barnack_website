@@ -4,13 +4,20 @@ var ejs = require("ejs");
 exports.send_page = function send_page(req, res)
 	{
 	
-	fs.readFile(__dirname + "/index.ejs", function(err, data) 
+	fs.readFile(__dirname + "/../global/navbar.ejs", function(err, navbar) 
 		{
-		
-		res.writeHead(200, {'Content-Type': 'text/html'});
-		res.write(ejs.render(data.toString(), {name: "pappo"}));
-		res.end();
-		
+		fs.readFile(__dirname + "/index.ejs", function(err, page) 
+			{
+			var args = 
+				{
+				navbar: ejs.render(navbar.toString(), {})
+				};
+			
+			res.writeHead(200, {'Content-Type': 'text/html'});
+			res.write(ejs.render(page.toString(), args));
+			res.end();
+			
+			});
 		});
 	
 	}

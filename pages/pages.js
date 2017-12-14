@@ -3,6 +3,7 @@ var fs = require('fs');
 
 exports._404 = require(__dirname + "/404/404.js");
 exports.index = require(__dirname + "/index/index.js");
+exports.about_me = require(__dirname + "/about_me/about_me.js");
 
 exports.init = function init(app)
 	{
