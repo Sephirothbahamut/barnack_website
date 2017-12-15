@@ -13,12 +13,6 @@ var page = require(__dirname + "/pages/pages.js");
 page.init(app);
 
 //==================== Server ====================
-//handle get
-app.get("/", page.index.send_page);
-app.get("/home", page.index.send_page);
-app.get("/index", page.index.send_page);
-
-app.get("/about_me", page.about_me.send_page);
 
 app.use(function(req, res) {
     res.status(404);
