@@ -1,0 +1,9 @@
+
+:root
+	{
+	--c_outer_background: rgb(0, 0, 32);
+	--c_background: rgb(0, 20, 40);
+	--c_text_background: rgb(40, 60, 80);
+	--c_text: rgb(220, 225, 230);
+	--c_text_shadow: #154c86;
+	}
