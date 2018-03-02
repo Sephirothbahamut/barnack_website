@@ -1,5 +1,4 @@
 //==================== Initializations ====================
-
 //dynamic pages
 var express = require("express");
 var app = express();
