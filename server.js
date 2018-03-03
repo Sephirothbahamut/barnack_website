@@ -5,6 +5,8 @@ const session = require("express-session");
 const app = express();
 const fileUpload = require("express-fileupload");
  
+var http = require("http");
+
 // default options
 app.set("view engine", "ejs");
 app.use(fileUpload());
@@ -30,7 +32,6 @@ app.listen(app.get('port'), function() {
 });
 
 //http & https
-var http = require("http");
 /*var https = require("https");*/
 /*http.createServer(app).listen(80);
 https.createServer(app).listen(443);*/
