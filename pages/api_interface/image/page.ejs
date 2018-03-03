@@ -1,0 +1,24 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+	<head>
+		<%- parts.header %>
+		<title>Barnack's</title>
+	</head>
+
+	<body>
+		<%- parts.navbar %>
+		<div class = "central_body">
+			<div class = "text">
+				<form action="/api/image" method="post" enctype="multipart/form-data">
+					Upload picture <br/>
+					<input type="file" name="file"/>
+					<input type="text" name="file_url"/>
+					<input type="submit" value="Send"/>
+				</form>
+				
+			</div>
+			
+		</div>
+		<%- parts.footer %>
+	</body>
+</html>

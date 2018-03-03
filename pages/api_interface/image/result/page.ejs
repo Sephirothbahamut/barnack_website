@@ -1,0 +1,18 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+	<head>
+		<%- parts.header %>
+		<title>Barnack's</title>
+	</head>
+
+	<body>
+		<%- parts.navbar %>
+		<div class = "central_body">
+			<% for(var i=0; i < session.result.tags.length; i++) { %>
+				<%- JSON.stringify(session.result.tags[i]) %><br/>
+			<% } %>
+			
+		</div>
+		<%- parts.footer %>
+	</body>
+</html>
