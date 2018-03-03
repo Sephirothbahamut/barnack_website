@@ -12,8 +12,13 @@ caption, table, td, tr{
   border: 0;
 }
 /* RESET END */
+/* vars */
+:root
+	{
+	--footer_height = 32px;
+	}
 
-html
+html, body
 	{
 	background-color: var(--c_outer_background);
 	font-size: 16px;
@@ -35,6 +40,11 @@ html
 	
 	width: 100%;
 	padding: 12px;
+	
+	min-height: calc(100% - 96px);*/
+    /*height: auto !important;
+	height: 100%;*/
+    /*margin: 0 auto -32px; */
 	}
 
 	
@@ -48,34 +58,14 @@ html
 		}
 	}
 	
-.box_text
-	{
-	background-color: var(--c_text_background);
-	
-	margin-bottom: 12px;
-	display: inline-block;
-	vertical-align: top;
-	position: relative;
-	overflow: hidden;
-	min-width: 96px;
-	line-height: 120%;
-	padding: 12px;
-	text-decoration: none;
-	text-shadow: 0px 1px var(--c_text_shadow);
-	
-	border-radius: 6px;
-	box-shadow: inset 0px 1px rgba(255,255,255,0.4), 0px 1px 2px rgba(0,0,0,0.2);
-	}
-	
 .box
 	{
 	background-color: var(--c_text_background);
 	
 	margin-bottom: 12px;
-	display: inline-block;
 	vertical-align: top;
 	position: relative;
-	overflow: hidden;
+	/*overflow: hidden;*/
 	min-width: 96px;
 	line-height: 120%;
 	padding: 12px;
@@ -85,22 +75,46 @@ html
 	border-radius: 6px;
 	box-shadow: inset 0px 1px rgba(255,255,255,0.4), 0px 1px 2px rgba(0,0,0,0.2);
 	}
-	
-.text
+
+p
 	{
-	background-color: var(--c_text_background);
-	
 	margin-bottom: 12px;
-	display: inline-block;
-	vertical-align: top;
-	position: relative;
-	overflow: hidden;
-	min-width: 96px;
-	line-height: 120%;
-	padding: 12px;
-	text-decoration: none;
-	text-shadow: 0px 1px var(--c_text_shadow);
-	}	
+	}
+
+a
+	{
+	color: var(--c_text_link);
+	}
+	
+a:visited
+	{
+	color: var(--c_text_link_opened);
+	}
+/*==============================================================*/
+/*=====================* LIST *=================================*/
+/*==============================================================*/
+
+.central_body ul li
+	{
+	margin: 8px 0;
+	}
+	
+.central_body ul li::before
+	{
+	font-family: FontAwesome;
+	content: "\f054";
+	padding-right: 8px;
+	}
+	
+.central_body ul li:hover
+	{
+	cursor: default;
+	}
+	
+.central_body ul
+	{
+	list-style-type: none;
+	}
 /*==============================================================*/
 /*=====================* DROPDOWN *=============================*/
 /*==============================================================*/
@@ -177,13 +191,26 @@ li.dropdown
 	}
 
 /*==============================================================*/
-/*=====================* NAVBAR *===============================*/
+/*=====================* NAVBAR & FOOTER *======================*/
 /*==============================================================*/
 .navbar
 	{
 	padding: 0 1%;
 	background-color: var(--c_text_background);
 	background-image: linear-gradient(var(--c_text_background),var(--c_outer_background));
+	}
+	
+.footer
+	{
+	width:100%;
+    height: var(--footer_height); 
+    clear: both;
+	
+	background: var(--c_text_background);
+	padding: 8px;
+	
+	border-top-style: solid;
+	border-top-color: var(--c_text);
 	}
 	
 /*==============================================================*/

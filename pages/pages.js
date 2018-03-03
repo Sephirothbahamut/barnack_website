@@ -5,16 +5,18 @@ var ejs = require("ejs");
 exports.init = function init(app)
 	{
 	//specific cases
-	app.get("/api", function(req, res)
+	
+	app.post("/api/*", function(req, res)
 		{
-		res.end();
+		var api_controller = require(__dirname + "/../api/controller.js");
+		api_controller(req, res);
 		});
 	
 	//all default pages
 	app.all("/*", function(req, res)
 		{
 		var q = url.parse(req.url, true).pathname;
-		//console.log("Requested" + '"' + q + '"');
+		console.log("Page request: " + '"' + q + '"');
 		var arr = q.split("/").filter(function(str){return(str.length != 0);});
 		if(arr.length == 0)
 			{q = "/index";}
@@ -47,53 +49,58 @@ function send_page(req, res, string)
 		{
 		fs.readFile(__dirname + "/global/navbar.ejs", function(err, navbar) 
 			{
-			fs.readFile(__dirname + string + "/page.ejs", function(err, page) 
+			fs.readFile(__dirname + "/global/footer.ejs", function(err, footer) 
 				{
-				if(!err)
+				fs.readFile(__dirname + string + "/page.ejs", function(err, page) 
 					{
-					var args = 
+					if(!err)
 						{
-						color_scheme: "dark"
-						};
+						var args = 
+							{
+							color_scheme: "dark"
+							};
+						
+						var parts =
+							{
+							navbar: ejs.render(navbar.toString(), args),
+							header: ejs.render(header.toString(), args),
+							footer: footer.toString()
+							};
+						res.writeHead(200, {'Content-Type': 'text/html'});
+						res.write(ejs.render(page.toString(), {args: args, parts: parts, session: req.session}));
+						res.end();
+						}
+					else
+						{
+						fs.readFile(__dirname + "/404/page.ejs", function(err, page) 
+							{
+							if(!err)
+								{
+								var args = 
+									{
+									color_scheme: "dark"
+									};
+								
+								var parts =
+									{
+									navbar: ejs.render(navbar.toString(), args),
+									header: ejs.render(header.toString(), args),
+									footer: ejs.render(footer.toString(), args)
+									};
+								res.writeHead(404, {'Content-Type': 'text/html'});
+								res.write(ejs.render(page.toString(), {args: args, parts: parts}));
+								res.end();
+								}
+							else
+								{
+								res.writeHead(500, {'Content-Type': 'text/html'});
+								res.write("Error 500: Cannot find 404 error page.");
+								res.end();
+								}
+							});
+						}
 					
-					var parts =
-						{
-						navbar: ejs.render(navbar.toString(), args),
-						header: ejs.render(header.toString(), args)
-						};
-					res.writeHead(200, {'Content-Type': 'text/html'});
-					res.write(ejs.render(page.toString(), {args: args, parts: parts}));
-					res.end();
-					}
-				else
-					{
-					fs.readFile(__dirname + "/404.html", function(err, page) 
-						{
-						if(!err)
-							{
-							var args = 
-								{
-								color_scheme: "dark"
-								};
-							
-							var parts =
-								{
-								navbar: ejs.render(navbar.toString(), args),
-								header: ejs.render(header.toString(), args)
-								};
-							res.writeHead(404, {'Content-Type': 'text/html'});
-							res.write(ejs.render(page.toString(), {args: args, parts: parts}));
-							res.end();
-							}
-						else
-							{
-							res.writeHead(500, {'Content-Type': 'text/html'});
-							res.write("Error 500: Cannot find 404 error page.");
-							res.end();
-							}
-						});
-					}
-				
+					});
 				});
 			});
 		});

@@ -1,11 +1,15 @@
 //==================== Initializations ====================
 //dynamic pages
-var express = require("express");
-var app = express();
+const express = require("express");
+const session = require("express-session");
+const app = express();
+const fileUpload = require("express-fileupload");
+ 
+// default options
 app.set("view engine", "ejs");
-
-//http
-var http = require("http");
+app.use(fileUpload());
+app.use(session({secret: "whut"}));
+app.use(express.static(__dirname + "/files"));
 
 //pages modules/db/db
 var page = require(__dirname + "/pages/pages.js");
@@ -25,8 +29,14 @@ app.listen(app.get('port'), function() {
     console.log('Node app is running on port', app.get('port'));
 });
 
+//http & https
+var http = require("http");
+/*var https = require("https");*/
+/*http.createServer(app).listen(80);
+https.createServer(app).listen(443);*/
+
 //alive
 setInterval(function()
 	{
-	http.get("https://barnack-website.herokuapp.com/");
+	http.get("http://barnack-website.herokuapp.com/");
 	}, 300000)

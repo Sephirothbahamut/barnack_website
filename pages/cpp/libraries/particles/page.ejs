@@ -1,18 +1,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 	<head>
-		<link rel="stylesheet" type="text/css" href="/../../../global/css/style.css">
-		<meta charset="utf-8"/>
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-		
+		<%- parts.header %>
+		<link href="http://3rin.gs/tengwar/packages/tengwar@0a896ef/tengwar-parmaite.css" rel="stylesheet" type="text/css">
 		<title>Barnack's</title>
 	</head>
 
 	<body>
-		<%- navbar %>
+		<%- parts.navbar %>
+			
 		<div class = "central_body">
 			<h1>Particle effect</h1>
-			<div class = "text">
+			<div class = "box text">
 				<p>
 					This is my first attempt at creating a particles effect in c++<br/>
 					It's fixed-step dependent, but can be made dynamic easily.
@@ -21,7 +20,7 @@
 					each single particle.
 				</p>
 			</div>
-			<div class = "text">
+			<div class = "box text">
 				These are the properties which can be customized:
 				<ul>
 					<li>Size scale (both x and y)</li>
@@ -36,7 +35,6 @@
 					create particles which speed is equal to 8-12 units per step.
 				</p>
 			<div>
-			
 		</div>
 	</body>
 </html>

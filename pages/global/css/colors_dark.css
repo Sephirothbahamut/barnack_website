@@ -6,4 +6,9 @@
 	--c_text_background: rgb(40, 60, 80);
 	--c_text: rgb(220, 225, 230);
 	--c_text_shadow: #154c86;
+	--c_ok: rgb(80, 225, 100);
+	--c_mid: rgb(225, 225, 20);
+	--c_no: rgb(255, 80, 80);
+	--c_text_link: rgb(200, 235, 200);
+	--c_text_link_opened: rgb(200, 200, 235);
 	}
