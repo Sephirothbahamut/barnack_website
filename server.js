@@ -6,7 +6,6 @@ const app = express();
 const fileUpload = require("express-fileupload");
  
 var http = require("http");
-
 // default options
 app.set("view engine", "ejs");
 app.use(fileUpload());
@@ -14,15 +13,11 @@ app.use(session({secret: "whut"}));
 app.use(express.static(__dirname + "/files"));
 
 //pages modules/db/db
-var page = require(__dirname + "/pages/pages.js");
-page.init(app);
 
 //==================== Server ====================
 
-app.use(function(req, res) {
-    res.status(404);
-	page._404.send_page(req, res);
-});
+var page = require(__dirname + "/pages/pages.js");
+page.init(app);
 
 //start server
 app.set('port', (process.env.PORT || 3000));

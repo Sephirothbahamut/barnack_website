@@ -2,6 +2,8 @@ var url = require('url');
 var fs = require('fs');
 var ejs = require("ejs");
 
+var visitors = 0;
+
 exports.init = function init(app)
 	{
 	//specific cases
@@ -15,6 +17,12 @@ exports.init = function init(app)
 	//all default pages
 	app.all("/*", function(req, res)
 		{
+		if(!req.session.visitors)
+			{
+			visitors++;
+			req.session.visitors = visitors;
+			}
+		
 		var q = url.parse(req.url, true).pathname;
 		console.log("Page request: " + '"' + q + '"');
 		var arr = q.split("/").filter(function(str){return(str.length != 0);});
@@ -57,14 +65,15 @@ function send_page(req, res, string)
 						{
 						var args = 
 							{
-							color_scheme: "dark"
+							color_scheme: "dark",
+							visitors: visitors
 							};
 						
 						var parts =
 							{
 							navbar: ejs.render(navbar.toString(), args),
 							header: ejs.render(header.toString(), args),
-							footer: footer.toString()
+							footer: ejs.render(footer.toString(), args)
 							};
 						res.writeHead(200, {'Content-Type': 'text/html'});
 						res.write(ejs.render(page.toString(), {args: args, parts: parts, session: req.session}));
@@ -78,7 +87,8 @@ function send_page(req, res, string)
 								{
 								var args = 
 									{
-									color_scheme: "dark"
+									color_scheme: "dark",
+									visitors: visitors
 									};
 								
 								var parts =
