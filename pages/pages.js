@@ -4,6 +4,18 @@ var ejs = require("ejs");
 
 var visitors = 0;
 
+fs.readFile(__dirname+"/visitors.txt", "utf8", function(err, data)
+	{
+	visitors = parseInt(data);
+	setInterval(function()
+		{
+		var wstream = fs.createWriteStream(__dirname+"/visitors.txt");
+		wstream.write(visitors.toString());
+		wstream.end();
+		}, 30000);
+	});
+
+
 exports.init = function init(app)
 	{
 	//specific cases
